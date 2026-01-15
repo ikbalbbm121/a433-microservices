@@ -1,26 +1,17 @@
-version: '2.4' # Menggunakan versi Docker Compose yang mendukung konfigurasi lebih luas
-
 services:
-  # Service untuk aplikasi utama
   item-app:
-    # Menggunakan image yang telah di-push ke GitHub Packages
     image: ghcr.io/ikbalbbm121/ikbalbbm120/item-app:v1
-    # Menerapkan restart policy agar container otomatis restart jika terhenti
-    restart: always
+    restart: always # Selalu restart jika aplikasi crash
     ports:
-      - "80:8080" # Mapping port 80 host ke port 8080 container
+      - "80:8080"
     depends_on:
-      - item-db # Menjamin aplikasi hanya berjalan setelah database siap
+      - item-db
 
-  # Service untuk database MongoDB
   item-db:
-    # Menggunakan image resmi MongoDB versi 3
     image: mongo:3
-    # Menerapkan restart policy agar database selalu tersedia
-    restart: always
+    restart: always # Selalu restart jika database crash
     volumes:
-      - app-db:/data/db # Menggunakan volume eksternal untuk menyimpan data database
+      - app-db:/data/db
 
-# Mendefinisikan volume bernama app-db untuk persistensi data
 volumes:
   app-db:

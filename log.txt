@@ -37,3 +37,6 @@ item-db-1   | 2026-01-15T19:11:49.695+0000 I INDEX    [LogicalSessionCacheRefres
 item-db-1   | 2026-01-15T19:11:49.697+0000 I INDEX    [LogicalSessionCacheRefresh] build index done.  scanned 0 total records. 0 secs
 item-db-1   | 2026-01-15T19:11:49.755+0000 I NETWORK  [listener] connection accepted from 172.18.0.3:35100 #1 (1 connection now open)
 item-db-1   | 2026-01-15T19:11:49.765+0000 I NETWORK  [conn1] received client metadata from 172.18.0.3:35100 conn1: { driver: { name: "nodejs", version: "2.2.36" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "6.17.0-8-generic" }, platform: "Node.js v14.21.3, LE, mongodb-core: 2.1.20" }
+item-db-1   | 2026-01-15T19:44:01.694+0000 I NETWORK  [conn1] end connection 172.18.0.3:35100 (0 connections now open)
+item-db-1   | 2026-01-15T19:44:02.937+0000 I NETWORK  [listener] connection accepted from 172.18.0.3:56640 #2 (1 connection now open)
+item-db-1   | 2026-01-15T19:44:02.944+0000 I NETWORK  [conn2] received client metadata from 172.18.0.3:56640 conn2: { driver: { name: "nodejs", version: "2.2.36" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "6.17.0-8-generic" }, platform: "Node.js v14.21.3, LE, mongodb-core: 2.1.20" }
