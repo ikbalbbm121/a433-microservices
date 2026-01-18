@@ -1,6 +1,6 @@
 services:
   item-app:
-    image: ghcr.io/ikbalbbm121/a433-microservices/item-app:v1
+    image: ghcr.io/ikbalbbm121/ikbalbbm120/item-app:v1
     restart: always # Selalu restart jika aplikasi crash
     ports:
       - "80:8080"
