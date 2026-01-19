@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 1. Definisikan variabel (ganti <username-docker> dengan username Anda)
-USER_DOCKER="<ikbalbbm120>"
+USER_DOCKER="ikbalbbm120"
 IMAGE_NAME="karsajobs"
 
 # 2. Build Docker Image
