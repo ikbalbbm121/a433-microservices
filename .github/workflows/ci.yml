@@ -1,0 +1,37 @@
+name: KarsaJobs Backend CI
+
+on:
+  push:
+    branches: [ karsajobs ] # Menjalankan CI saat ada push ke branch karsajobs
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Kriteria: lint-dockerfile (Hadolint)
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
+      # Kriteria: test-app (Go Unit Test)
+      - name: Run Unit Test
+        run: go test -v -short --count=1 $(go list ./...)
+
+      # Kriteria: build-app-karsajobs (Push to GHCR)
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }} # Menggunakan token otomatis GitHub
+
+      - name: Build and Push Image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/karsajobs:latest
