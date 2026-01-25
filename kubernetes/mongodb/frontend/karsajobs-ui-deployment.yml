@@ -16,6 +16,8 @@ spec:
       - name: karsajobs-ui
         # Menggunakan image frontend dari GHCR sesuai saran
         image: ghcr.io/ikbalbbm120/karsajobs-ui:latest
-        ports:
-        # Ubah port ini agar sama dengan EXPOSE di Dockerfile karsajobs-ui
-        - containerPort: 8080
+ports:
+    - protocol: TCP
+      port: 8000       # Port yang diakses di dalam cluster
+      targetPort: 8000 # Harus sama dengan containerPort di Deployment
+      nodePort: 30001  # Tetap biarkan ini untuk akses browser

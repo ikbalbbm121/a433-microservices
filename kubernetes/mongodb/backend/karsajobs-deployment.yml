@@ -19,21 +19,22 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: MONGODB_URL
-          valueFrom:
-            configMapKeyRef:
-              name: mongo-config
-              key: MONGODB_URL
-        # Penambahan variabel lingkungan sesuai instruksi reviewer
+# 1. Tambahkan APP_PORT (Wajib!)
+        - name: APP_PORT
+          value: "8080"
+          
+        # 2. MONGODB_URL SUDAH DIHAPUS (Sesuai instruksi reviewer)
+
+        # 3. Tetap gunakan variabel mongo yang sudah kamu buat
         - name: MONGO_HOST
-          value: "mongo-service" # Mengambil nama dari Service MongoDB
+          value: "mongo-service" 
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
               name: mongo-secret
-              key: mongo-root-username # Diambil dari MongoDB Secret
+              key: mongo-root-username 
         - name: MONGO_PASS
           valueFrom:
             secretKeyRef:
               name: mongo-secret
-              key: mongo-root-password # Diambil dari MongoDB Secret
+              key: mongo-root-password
