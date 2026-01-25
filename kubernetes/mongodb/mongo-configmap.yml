@@ -1,3 +1,12 @@
+# 1. Tambahkan apiVersion dan kind
+apiVersion: v1
+kind: ConfigMap
+
+# 2. Metadata untuk memberi nama pada ConfigMap ini
+metadata:
+  name: mongo-config
+
+# 3. Bagian data yang berisi konfigurasi MongoDB
 data:
   mongo.conf: |
     storage:

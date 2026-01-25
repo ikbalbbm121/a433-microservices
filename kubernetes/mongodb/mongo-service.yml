@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service # Nama ini wajib sama dengan MONGO_HOST di backend
+spec:
+  selector:
+    app: mongodb # Harus cocok dengan label pada mongo-statefulset.yml
+  ports:
+    - protocol: TCP
+      port: 27017       # Port standar MongoDB
+      targetPort: 27017 # Port di dalam container MongoDB
+  type: ClusterIP      # Karena database hanya perlu diakses dari dalam cluster
