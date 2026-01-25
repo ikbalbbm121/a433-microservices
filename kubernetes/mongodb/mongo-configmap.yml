@@ -1,0 +1,5 @@
+data:
+  mongo.conf: |
+    storage:
+      dbPath: /data/db
+  MONGODB_URL: "mongodb://mongo-service:27017"

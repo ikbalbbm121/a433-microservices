@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karsajobs-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karsajobs-backend
+  template:
+    metadata:
+      labels:
+        app: karsajobs-backend
+    spec:
+      containers:
+      - name: karsajobs-backend
+        # Menggunakan image dari GitHub Packages (GHCR) sesuai saran reviewer
+        image: ghcr.io/ikbalbbm120/karsajobs:latest 
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGODB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config
+              key: MONGODB_URL
+        # Penambahan variabel lingkungan sesuai instruksi reviewer
+        - name: MONGO_HOST
+          value: "mongo-service" # Mengambil nama dari Service MongoDB
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-root-username # Diambil dari MongoDB Secret
+        - name: MONGO_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: mongo-root-password # Diambil dari MongoDB Secret

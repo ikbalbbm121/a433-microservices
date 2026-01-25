@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+spec:
+  serviceName: "mongo-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        env:
+        # Menggunakan akhiran _FILE sesuai instruksi reviewer
+        - name: MONGO_INITDB_ROOT_USERNAME_FILE
+          value: /etc/mongo-credentials/mongo-root-username
+        - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+          value: /etc/mongo-credentials/mongo-root-password
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/db
+        # Menambahkan mount untuk Secret
+        - name: mongo-credentials
+          mountPath: /etc/mongo-credentials
+          readOnly: true
+        # Menambahkan mount untuk ConfigMap
+        - name: mongo-config-volume
+          mountPath: /config
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: mongo-pvc
+      # Mendefinisikan volume untuk Secret
+      - name: mongo-credentials
+        secret:
+          secretName: mongo-secret
+      # Mendefinisikan volume untuk ConfigMap
+      - name: mongo-config-volume
+        configMap:
+          name: mongo-config
