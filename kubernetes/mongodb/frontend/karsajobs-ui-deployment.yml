@@ -14,10 +14,6 @@ spec:
     spec:
       containers:
       - name: karsajobs-ui
-        # Menggunakan image frontend dari GHCR sesuai saran
         image: ghcr.io/ikbalbbm120/karsajobs-ui:latest
-ports:
-    - protocol: TCP
-      port: 8000       # Port yang diakses di dalam cluster
-      targetPort: 8000 # Harus sama dengan containerPort di Deployment
-      nodePort: 30001  # Tetap biarkan ini untuk akses browser
+        ports:
+        - containerPort: 8000

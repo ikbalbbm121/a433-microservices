@@ -14,25 +14,19 @@ spec:
     spec:
       containers:
       - name: karsajobs-backend
-        # Menggunakan image dari GitHub Packages (GHCR) sesuai saran reviewer
-        image: ghcr.io/ikbalbbm120/karsajobs:latest 
+        image: ghcr.io/ikbalbbm120/karsajobs:latest
         ports:
         - containerPort: 8080
         env:
-# 1. Tambahkan APP_PORT (Wajib!)
         - name: APP_PORT
           value: "8080"
-          
-        # 2. MONGODB_URL SUDAH DIHAPUS (Sesuai instruksi reviewer)
-
-        # 3. Tetap gunakan variabel mongo yang sudah kamu buat
         - name: MONGO_HOST
-          value: "mongo-service" 
+          value: "mongo-service"
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
               name: mongo-secret
-              key: mongo-root-username 
+              key: mongo-root-username
         - name: MONGO_PASS
           valueFrom:
             secretKeyRef:

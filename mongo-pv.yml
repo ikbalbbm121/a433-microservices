@@ -4,9 +4,8 @@ metadata:
   name: mongo-pv
 spec:
   capacity:
-    storage: 1Gi # Harus sama atau lebih besar dari permintaan PVC
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: "/mnt/data" # Lokasi penyimpanan fisik di node Minikube kamu
+    path: "/mnt/data"
